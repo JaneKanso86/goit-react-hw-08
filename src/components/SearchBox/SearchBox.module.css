@@ -1,7 +1,14 @@
-.filter {
+.contact_form {
   display: flex;
-  margin-left: 20px;
-  width: 800px;
-  margin-bottom: 20px;
-  text-align: start;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 300px;
+  margin: 20px auto;
+}
+
+.contact_form_field {
+  padding: 8px 12px;
+  font-size: 16px;
+  border: 1px solid #aaa;
+  border-radius: 6px;
 }

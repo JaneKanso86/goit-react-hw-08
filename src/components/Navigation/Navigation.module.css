@@ -1,11 +1,12 @@
 .link {
-  display: inline-block;
+  margin-right: 16px;
   text-decoration: none;
-  padding: 12px;
-  font-weight: 700;
-  color: #2a363b;
+  font-weight: 500;
+  color: #1a73e8;
+  transition: color 0.2s ease;
 }
 
+.link:hover,
 .link.active {
-  color: #e84a5f;
+  color: #0d47a1;
 }
