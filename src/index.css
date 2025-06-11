@@ -24,7 +24,11 @@ a:hover {
 
 body {
   margin: 0;
-
+  background: radial-gradient(
+    circle,
+    rgb(221, 244, 11) 5%,
+    rgba(148, 187, 233, 1) 50%
+  );
   place-items: center;
   min-width: 320px;
   min-height: 100vh;

@@ -1,11 +1,23 @@
-.link {
-  display: inline-block;
-  text-decoration: none;
-  padding: 12px;
-  font-weight: 700;
-  color: #2a363b;
+.wraper {
+  display: flex;
+  gap: 25px;
 }
 
-.link.active {
-  color: #e84a5f;
+.navlink {
+  font-size: 30px;
+  text-decoration: none;
+  color: #3f5efb;
+  border-radius: 4px;
+  display: inline-block;
+  transform: scale(1);
+  transition: all 0.3s ease;
+}
+
+.navlink:hover {
+  transform: scale(1.1);
+  color: #fc466b;
+}
+
+.navlink.active {
+  color: #fc466b;
 }

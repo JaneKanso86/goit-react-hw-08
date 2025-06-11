@@ -1,3 +1,12 @@
+.container {
+  width: 450px;
+  min-height: 300px;
+  padding: 20px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
 .form {
   width: 320px;
 }
@@ -6,4 +15,39 @@
   display: flex;
   flex-direction: column;
   margin-bottom: 16px;
+  font-size: 20px;
+  font-weight: 600;
+  color: white;
+}
+.input {
+  width: 100%;
+  height: 35px;
+  border: 1px solid white;
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.5);
+  outline: none;
+  padding: 5px 10px;
+
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.btn {
+  border: none;
+  color: white;
+  background-color: #3f5efb;
+  transition: background-color 0.3s ease;
+  display: block;
+  margin: auto;
+  margin-top: 20px;
+  font-size: 20px;
+  outline: none;
+}
+
+.btn:hover {
+  background-color: #fc466b;
+}
+
+.message {
+  color: #fc466b;
 }

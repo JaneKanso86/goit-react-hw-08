@@ -1,49 +1,77 @@
 import { useDispatch } from 'react-redux';
 import css from './ContactForm.module.css';
-import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { addContact } from '../../redux/contacts/operations';
+import { Form, Formik, Field, ErrorMessage } from 'formik';
+import toast from 'react-hot-toast';
 
 export default function ContactForm() {
   const dispatch = useDispatch();
 
-  const handleSubmit = (evt) => {
-    evt.preventDefault();
-
-    const form = evt.target;
-    if (
-      form.elements.name.value.trim() == '' ||
-      form.elements.number.value.trim() == ''
-    ) {
-      toast.error('Please fill both fields.');
-      return;
-    }
-
+  const handleSubmit = (value, actions) => {
     dispatch(
       addContact({
-        id: crypto.randomUUID(),
-        name: form.elements.name.value,
-        number: form.elements.number.value,
+        name: value.name,
+        number: value.number,
       }),
-    );
-    form.reset();
+    )
+      .unwrap()
+      .then(() => {
+        toast.success('Contact been successfully added');
+        actions.resetForm();
+      })
+      .catch(() => {
+        toast.error('Something went wrong...');
+      });
   };
 
   return (
     <div className={css.card}>
-      <form className={css.form} onSubmit={handleSubmit}>
-        <label htmlFor="name">Name</label>
-        <input type="text" name="name" id="name" className={css.field} />
+      <Formik
+        initialValues={{ name: '', number: '' }}
+        validate={(values) => {
+          const error = {};
 
-        <label htmlFor="number">Number</label>
-        <input type="text" name="number" id="number" className={css.field} />
+          if (!values.number) {
+            error.number = 'Required phone number';
+          } else if (!/^\d{3}-\d{2}-\d{2}$/.test(values.number)) {
+            error.number = 'Please enter phone format 999-99-99';
+          }
+          return error;
+        }}
+        onSubmit={handleSubmit}
+      >
+        <Form className={css.form}>
+          <label htmlFor="name" className={css.label}>
+            Name
+            <Field type="text" name="name" id="name" className={css.field} />
+            <ErrorMessage
+              name="name"
+              component="span"
+              className={css.message}
+            />
+          </label>
 
-        <button type="submit" className={css.button}>
-          Add contact
-        </button>
-      </form>
+          <label htmlFor="number" className={css.label}>
+            Number
+            <Field
+              type="text"
+              name="number"
+              id="number"
+              className={css.field}
+            />
+            <ErrorMessage
+              name="number"
+              component="span"
+              className={css.message}
+            />
+          </label>
 
-      <ToastContainer position="top-right" autoClose={3000} />
+          <button type="submit" className={css.button}>
+            Add contact
+          </button>
+        </Form>
+      </Formik>
     </div>
   );
 }

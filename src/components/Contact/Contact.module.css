@@ -17,6 +17,23 @@ p {
   margin-right: 8px;
 }
 
-.button {
-  font-size: 12px;
+.btn {
+  border: none;
+  color: white;
+  background-color: #3f5efb;
+  transition: background-color 0.3s ease;
+  display: block;
+  margin: auto;
+  font-size: 14px;
+  outline: none;
+}
+
+.btn:hover {
+  background-color: #f0eded;
+}
+
+.operation {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 }

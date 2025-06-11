@@ -1,17 +1,23 @@
 import { lazy, Suspense, useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import Layout from './components/Layout/Layout';
+import Layout from '../Layout/Layout';
 import { useDispatch, useSelector } from 'react-redux';
-import { refreshUser } from './redux/auth/operations';
-import { selectIsRefreshing } from './redux/auth/selectors';
-import RestrictedRoute from './components/RestrictedRoute';
-import PrivateRoute from './components/PrivateRoute';
+import { refreshUser } from '../../redux/auth/operations';
+import { selectIsRefreshing } from '../../redux/auth/selectors';
+import RestrictedRoute from '../RestrictedRoute';
+import PrivateRoute from '../PrivateRoute';
+import { Toaster } from 'react-hot-toast';
+import './App.css';
 
-const HomePage = lazy(() => import('./pages/HomePage/HomePage'));
-const RegisterPage = lazy(() => import('./pages/RegisterPage/RegisterPage'));
-const LoginPage = lazy(() => import('./pages/LoginPage/LoginPage'));
-const ContactsPage = lazy(() => import('./pages/ContactsPage/ContactsPage'));
-const ProfilePage = lazy(() => import('./pages/ProfilePage/ProfilePage'));
+const HomePage = lazy(() => import('../../pages/HomePage/HomePage'));
+const RegisterPage = lazy(() =>
+  import('../../pages/RegisterPage/RegisterPage'),
+);
+const LoginPage = lazy(() => import('../../pages/LoginPage/LoginPage'));
+const ContactsPage = lazy(() =>
+  import('../../pages/ContactsPage/ContactsPage'),
+);
+const ProfilePage = lazy(() => import('../../pages/ProfilePage/ProfilePage'));
 
 export default function App() {
   const dispatch = useDispatch();
@@ -32,7 +38,7 @@ export default function App() {
             path="/register"
             element={
               <RestrictedRoute
-                redirectTo="/profile"
+                redirectTo="/contacts"
                 component={<RegisterPage />}
               />
             }
@@ -56,6 +62,7 @@ export default function App() {
           />
         </Routes>
       </Suspense>
+      <Toaster position="top-right" toastOptions={{ duration: 3000 }} />
     </Layout>
   );
 }
